@@ -1,0 +1,23 @@
+import java.sql.Connection;
+
+import kr.or.kosa.utils.SingletonHelper;
+
+public class Ex07_SingeletonHelper {
+
+	public static void main(String[] args) {
+		Connection conn = null;
+		conn = SingletonHelper.getInstance("oracle");
+		System.out.println(conn.toString());
+		System.out.println(conn.getMetaData().getDatabaseProductName());
+		
+		conn.close();
+		
+		
+		Connection conn2 = null;
+		conn2 = SingletonHelper.getConnection("oracle");
+		System.out.println(conn.toString());
+		System.out.println(conn.getMetaData().getDatabaseProductName());
+
+	}
+
+}

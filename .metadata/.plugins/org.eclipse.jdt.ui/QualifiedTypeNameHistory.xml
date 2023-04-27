@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.security.PublicKey"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="DTO.Dept"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="DTO.Emp"/>
+    <fullyQualifiedTypeName name="MariaDBConnection"/>
+    <fullyQualifiedTypeName name="Program"/>
+    <fullyQualifiedTypeName name="java.awt.image.SinglePixelPackedSampleModel"/>
+    <fullyQualifiedTypeName name="UTILS.SingletonHelper"/>
+    <fullyQualifiedTypeName name="javax.naming.spi.DirStateFactory.Result"/>
+    <fullyQualifiedTypeName name="oracle.jdbc.OracleTypes"/>
+    <fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthScrollBarUI"/>
+    <fullyQualifiedTypeName name="java.sql.Types"/>
+    <fullyQualifiedTypeName name="kr.or.kosa.utils.SingletonHelper"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.CallableStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+</qualifiedTypeNameHistroy>

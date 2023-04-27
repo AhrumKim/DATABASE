@@ -1,0 +1,63 @@
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class EX14_Mariadb_Procedure_Insert {
+
+	public static void main(String[] args) {
+		  String url = "jdbc:mariadb://localhost:3306/mydb";
+	        String user = "kosadb";
+	        String password = "1004";
+	        Connection conn = null;
+	        CallableStatement cstmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            // 데이터베이스 연결
+	            conn = DriverManager.getConnection(url, user, password);
+
+	            // 프로시저 호출
+	            String sql = "{call usp_EmpList(?, ?)}";
+	            cstmt = conn.prepareCall(sql);
+	            cstmt.setInt(1, 2000);
+	            cstmt.registerOutParameter(2, Types.REF_CURSOR);
+	            cstmt.execute();
+
+	            // 결과 출력
+	            rs = (ResultSet) cstmt.getObject(2);
+	            while (rs.next()) {
+	                int empno = rs.getInt("empno");
+	                String ename = rs.getString("ename");
+	                double sal = rs.getDouble("sal");
+	                System.out.println("Empno: " + empno + ", Ename: " + ename + ", Sal: " + sal);
+	            }
+
+	            // 프로시저 호출
+	            sql = "{call usp_Insert_Emp(?, ?, ?, ?)}";
+	            cstmt = conn.prepareCall(sql);
+	            cstmt.setInt(1, 9999);
+	            cstmt.setString(2, "John Doe");
+	            cstmt.setString(3, "Manager");
+	            cstmt.registerOutParameter(4, Types.VARCHAR);
+	            cstmt.execute();
+
+	            // 결과 출력
+	            String outmsg = cstmt.getString(4);
+	            System.out.println(outmsg);
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            // 자원 해제
+	            try {
+	                if (rs != null) rs.close();
+	                if (cstmt != null) cstmt.close();
+	                if (conn != null) conn.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+}
