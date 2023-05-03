@@ -22,7 +22,7 @@ Controller   >> 중앙제어 (통제) >> 웹의 접근 통제 >> 요청과 응�
 public class Program {
 	public static void main(String[] args) {
 		
-	
+		/*
 		Dept dept = new Dept();
 		dept.setDeptno(100);
 		dept.setDname("IT");
@@ -31,7 +31,7 @@ public class Program {
 		
 		Emp emp = new Emp(200, "김유신");
 		System.out.println(emp.toString());
-
+		*/
 		
 		//main 함수가  UI 와 요청/응답 처리
 		//결국 main 함수가 (view 와 controller 역할 제공)
@@ -117,6 +117,14 @@ public class Program {
 		}
 	}
 }
+
+
+
+
+
+
+
+
 
 
 
