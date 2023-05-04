@@ -14,10 +14,10 @@ public class ExerciseRecordsDao {
 	public void exerciseStart(String eTypeCode, String u_ID) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-
+		
 		try {
 			conn = ConnectionHelper.getConnection("oracle");
-			String sql = "INSERT INTO ExerciseRecords (ERecordID, ETypeCode, U_ID) "
+			String sql = "INSERT INTO ExerciseRecords (ERecordID, ETypeCode, U_ID)"
 					+ "VALUES ('ER' || LPAD(ExerciseRecordsSeq.NEXTVAL, 5, '0'), ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, eTypeCode);
@@ -34,9 +34,13 @@ public class ExerciseRecordsDao {
 			ConnectionHelper.close(pstmt);
 		}
 	}
+	
+	
+		
 
 	// 운동종료 ( 측정 종료 ) update
-	public void exerciseEnd(String u_id) {
+	public void exerciseEnd(String u_id) {                    
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

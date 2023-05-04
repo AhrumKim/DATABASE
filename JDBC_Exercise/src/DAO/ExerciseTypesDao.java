@@ -22,7 +22,7 @@ public class ExerciseTypesDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		System.out.println("******************************");
-		System.out.println("조회하실 운동 종목을 보여드릴께요!!^^");
+		System.out.println("운동 종목을 보여드릴께요!!^^");
 		System.out.println("******************************");
 		System.out.println("------------------------------");
 		
