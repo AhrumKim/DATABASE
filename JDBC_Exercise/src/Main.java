@@ -3,6 +3,7 @@ import java.util.Scanner;
 import DAO.ExerciseRecordsDao;
 import DAO.ExerciseTypesDao;
 import DAO.UsersDao;
+import DTO.Users;
 
 
 
@@ -28,16 +29,15 @@ public class Main {
 		int strnum =sc.nextInt();
 		
 		switch(strnum) {
-		case 1 : dao.addUser(null);
-		case 2 : types.exerciseTypeAll();
-		case 3 :// 운동 기록
+		case 1 : dao.addUser();break;
+		case 2 : types.exerciseTypeAll();break;
+		case 3 :// 운동 기록;break;
 		case 4 : dao.updateUsers(null);
-		
+		}
 		
 		}
 		
 		
 		
-	}
 }
 

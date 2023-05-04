@@ -12,6 +12,7 @@ public class UsersDao {
 		
 	Scanner sc = new Scanner(System.in);
 	
+	//사용자 정보 수정하기
 	public int updateUsers(Users users) {
 		System.out.println("아이디를 입력하세요!");
 		users.setU_ID(sc.nextLine());
@@ -53,29 +54,68 @@ public class UsersDao {
 		}
 		return rownum;
 	}
-	public int addUser(Users user) {
+
+		// 사용자 정보 추가하기
+	public void addUser() {
 		Connection conn = null;
-		PreparedStatement pstmt = null;
-		int rowcount = 0;
+		PreparedStatement pstmt = null ;
+		
 		try {
 		conn = ConnectionHelper.getConnection("oracle","kosa","1004");
 		String sql = "INSERT INTO users(U_ID, U_PWD, U_NAME, Weight, Height, Gender) VALUES(?, ?, ?, ?, ?, ?)";
 		pstmt = conn.prepareStatement(sql);
-		pstmt.setString(1, user.getU_ID());
-		pstmt.setString(2, user.getU_PWD());
-		pstmt.setString(3, user.getU_Name());
-		pstmt.setDouble(4, user.getWeight());
-		pstmt.setDouble(5, user.getHeight());
-		pstmt.setString(6, user.getGender());
-		rowcount = pstmt.executeUpdate();
-		System.out.println(rowcount);
-		} catch (Exception e) {
-		e.printStackTrace();
-		System.out.println(e.getMessage());
-		} finally {
-		ConnectionHelper.close(pstmt);
-		ConnectionHelper.close(conn);
-		}
-		return rowcount;
-			} 
+		
+		System.out.println("추가하실 사용자의 정보를 입력해주세요.");
+		System.out.println("사용자 ID: ");
+		String U_ID=sc.nextLine();
+		pstmt.setString(1,U_ID);
+		
+		System.out.println("추가하실 사용자의 정보를 입력해주세요.");
+		System.out.println("사용자 PWD: ");
+		String U_PWD =sc.nextLine();
+		pstmt.setString(2, U_PWD);
+		
+		System.out.println("추가하실 사용자의 정보를 입력해주세요.");
+		System.out.println("사용자 이름: ");
+		String U_Name=sc.nextLine();
+		pstmt.setString(3, U_Name);
+		
+		System.out.println("추가하실 사용자의 정보를 입력해주세요.");
+		System.out.println("사용자 몸무게: ");
+		double Weight=sc.nextDouble();
+		pstmt.setDouble(4, Weight);
+		
+		System.out.println("추가하실 사용자의 정보를 입력해주세요.");
+		System.out.println("사용자 키: ");
+		double Height=sc.nextDouble();
+		pstmt.setDouble(5, Height);
+		
+		System.out.println("추가하실 사용자의 정보를 입력해주세요.");
+		System.out.println("사용자 성별(M/F): ");
+		String Gender=sc.nextLine();
+		pstmt.setString(6, Gender);
+		
+		int count = pstmt.executeUpdate();
+
+		if(count>0){
+	        System.out.println("사용자 정보가 추가되었습니다.");
+	    } else {
+	        System.out.println("사용자 정보추가에 실패하였습니다.");
+	    }
+	} catch (Exception e) {
+	    System.out.println(e.getMessage());
+	} finally {
+	    try {
+	        conn.close();
+	        pstmt.close();
+	     
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	}
 }
+		
+	
+
+

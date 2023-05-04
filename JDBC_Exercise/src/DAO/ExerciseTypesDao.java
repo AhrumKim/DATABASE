@@ -21,8 +21,10 @@ public class ExerciseTypesDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		System.out.println("******************************");
 		System.out.println("조회하실 운동 종목을 보여드릴께요!!^^");
-		
+		System.out.println("******************************");
+		System.out.println("------------------------------");
 		
 		
 		try {
@@ -58,18 +60,20 @@ public class ExerciseTypesDao {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("******************************");
 		System.out.println("추가 사용하실 메뉴를 선택해주세요");
+		System.out.println("******************************");
 		System.out.println("------------------------------");
 		System.out.println("1. 운동 코드 추가하기");
 		System.out.println("2. 운동 코드 삭제하기");
 		System.out.println("3. 운동 코드 수정하기");
 		System.out.println("------------------------------");
 		
-		int strnum = sc.nextInt();
+		String strnum = sc.nextLine();
 		switch(strnum) {
-		case 1: addExercise(null);
-		case 2: deleteExercise(null);
-		case 3: updateExercise(null);
+		case "1": addExercise(null);break;
+		case "2": deleteExercise();break;
+		case "3": updateExercise(null);break;
 			
 		}
 		return list;
@@ -81,11 +85,11 @@ public class ExerciseTypesDao {
 
 
 	//운동 종목 추가
-	@SuppressWarnings("null")
+	//@SuppressWarnings("null")
 	public void addExercise(ExerciseTypes type) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+	
 		
 		try {
 		    conn = ConnectionHelper.getConnection("oracle");
@@ -125,27 +129,34 @@ public class ExerciseTypesDao {
 		    try {
 		        conn.close();
 		        pstmt.close();
-		        rs.close();
+		     
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
 		}
+		exerciseTypeAll();
+		
 	}
 	
 	
 		//운동 종목 삭제
-	@SuppressWarnings("null")
-	public void deleteExercise(String code) {
+//	@SuppressWarnings("null")
+//	@SuppressWarnings({ "null", "resource" })
+	public void deleteExercise() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		
 		try {
+			
 		    conn = ConnectionHelper.getConnection("oracle");
 
 		    // 운동 종목 삭제를 위한 쿼리
 		    String sql = "DELETE FROM ExerciseTypes WHERE ETypeCode = ?";
 		    pstmt = conn.prepareStatement(sql);
-		    pstmt.setString(1, code);
+		    System.out.println("삭제하실 코드 번호를 입력해주세요^^");
+			String code1 = sc.nextLine();
+			 
+		    pstmt.setString(1, code1);
 
 		    int count = pstmt.executeUpdate();
 
@@ -160,21 +171,22 @@ public class ExerciseTypesDao {
 		    try {
 		        conn.close();
 		        pstmt.close();
-		        rs.close();
+		        
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
 		}
+		exerciseTypeAll();
 	}
 	
 				
 		//운동 종목 수정
-	@SuppressWarnings("null")
+	//@SuppressWarnings("null")
 	public void updateExercise(ExerciseTypes type) {
 		
 		Connection conn = null;
 	    PreparedStatement pstmt = null;
-	    ResultSet rs = null;
+	  
 
 	    try {
 	        conn = ConnectionHelper.getConnection("oracle");
@@ -214,15 +226,15 @@ public class ExerciseTypesDao {
 	        try {
 	            conn.close();
 	            pstmt.close();
-	            rs.close();
+	        
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 
-	    return;
+	    exerciseTypeAll();
 	}
 	
 }
-		
+	
 
