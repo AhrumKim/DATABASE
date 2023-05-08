@@ -13,6 +13,30 @@ import UTILS.ConnectionHelper;
 
 public class ExerciseTypesDao {
 	Scanner sc= new Scanner(System.in); 
+	
+	
+	//운동 종목 추가 메뉴
+	public void ExerciseTypesmenue() {
+		System.out.println("******************************");
+		System.out.println("추가 사용하실 메뉴를 선택해주세요");
+		System.out.println("******************************");
+		System.out.println("------------------------------");
+		System.out.println("1. 운동 종목 조회하기");
+		System.out.println("2. 운동 코드 추가하기");
+		System.out.println("3. 운동 코드 삭제하기");
+		System.out.println("4. 운동 코드 수정하기");
+		System.out.println("------------------------------");
+		
+		String strnum = sc.nextLine();
+		switch(strnum) {
+		case "1": exerciseTypeAll();break;
+		case "2": addExercise(null);break;
+		case "3": deleteExercise();break;
+		case "4": updateExercise(null);break;
+			
+		}
+	}
+
 	// 운동 종목 조회
 	//@SuppressWarnings("null")
 	public List<ExerciseTypes> exerciseTypeAll() {
@@ -25,15 +49,10 @@ public class ExerciseTypesDao {
 		System.out.println("운동 종목을 보여드릴께요!!^^");
 		System.out.println("******************************");
 		System.out.println("------------------------------");
-		
-		
+				
 		try {
 			
 			conn = ConnectionHelper.getConnection("oracle");
-			/*
-			String sql = "select ETypeCode, ETypeName, ETypeDesc, CalPerHour from"
-					+ " ExerciseTypes";
-			*/
 			String sql = "select * from ExerciseTypes";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -60,26 +79,10 @@ public class ExerciseTypesDao {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("******************************");
-		System.out.println("추가 사용하실 메뉴를 선택해주세요");
-		System.out.println("******************************");
-		System.out.println("------------------------------");
-		System.out.println("1. 운동 코드 추가하기");
-		System.out.println("2. 운동 코드 삭제하기");
-		System.out.println("3. 운동 코드 수정하기");
-		System.out.println("------------------------------");
-		
-		String strnum = sc.nextLine();
-		switch(strnum) {
-		case "1": addExercise(null);break;
-		case "2": deleteExercise();break;
-		case "3": updateExercise(null);break;
-			
-		}
+	
 		return list;
-		
 	}
-		
+	
 
 
 
@@ -134,8 +137,7 @@ public class ExerciseTypesDao {
 		        e.printStackTrace();
 		    }
 		}
-		exerciseTypeAll();
-		
+	
 	}
 	
 	
@@ -176,7 +178,7 @@ public class ExerciseTypesDao {
 		        e.printStackTrace();
 		    }
 		}
-		exerciseTypeAll();
+	
 	}
 	
 				
@@ -195,8 +197,7 @@ public class ExerciseTypesDao {
 	        String sql = "UPDATE ExerciseTypes SET ETypeName = ?, ETypeDesc = ?, CalPerHour = ? WHERE ETypeCode = ?";
 	        pstmt = conn.prepareStatement(sql);
 
-	        System.out.println("수정하실 운동 종목의 정보를 입력해주세요.");
-
+	        
 	        System.out.print("운동 종목 이름: ");
 	        String name = sc.nextLine();
 	        pstmt.setString(1, name);
@@ -206,12 +207,15 @@ public class ExerciseTypesDao {
 	        pstmt.setString(2, desc);
 
 	        System.out.print("1시간당 소모 칼로리: ");
-	        int cal = sc.nextInt();
-	        sc.nextLine(); // 개행 문자 제거
+	        int cal = Integer.parseInt(sc.nextLine());
 	        pstmt.setInt(3, cal);
 
-	        pstmt.setString(4, desc);
 
+	        System.out.println("수정하실 운동 종목의 정보를 입력해주세요.");
+	        System.out.print("운동 종목 코드: ");
+	        String code = sc.nextLine();
+	        pstmt.setString(4, code);
+	       
 	        int cnt = pstmt.executeUpdate();
 
 	        if (cnt > 0) {
@@ -232,7 +236,7 @@ public class ExerciseTypesDao {
 	        }
 	    }
 
-	    exerciseTypeAll();
+
 	}
 	
 }
